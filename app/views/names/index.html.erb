@@ -1,31 +1,40 @@
-<h1>Listing names</h1>
-
-<table>
+<%- model_class = Names -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => Names %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>F name</th>
-      <th>L name</th>
-      <th>Notes</th>
-      <th>User</th>
-      <th colspan="3"></th>
+      <th>ID</th>
+      <th><%= model_class.human_attribute_name(:f_name) %></th>
+      <th><%= model_class.human_attribute_name(:l_name) %></th>
+      <th><%= model_class.human_attribute_name(:notes) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
-    <% @names.each do |name| %>
+    <% @names.each do |names| %>
       <tr>
-        <td><%= name.f_name %></td>
-        <td><%= name.l_name %></td>
-        <td><%= name.notes %></td>
-        <td><%= name.user %></td>
-        <td><%= link_to 'Show', name %></td>
-        <td><%= link_to 'Edit', edit_name_path(name) %></td>
-        <td><%= link_to 'Destroy', name, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= names.id %></td>
+        <td><%= names.f_name %></td>
+        <td><%= names.l_name %></td>
+        <td><%= names.notes %></td>
+        <td><%=l names.created_at, format: :long %></td>
+        <td>
+          <%= link_to names_path(names), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+            <%= glyph 'info-sign' %>
+            <%= glyph 'pencil' %>
+          <%- end -%>
+          <%= link_to names_path(names), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
+            <%= glyph 'remove' %>
+          <%- end -%>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Name', new_name_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_names_path,
+            :class => 'btn btn-primary' %>
