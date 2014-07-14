@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>F name:</strong>
+  <%= @name.f_name %>
+</p>
+
+<p>
+  <strong>L name:</strong>
+  <%= @name.l_name %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @name.notes %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @name.user %>
+</p>
+
+<%= link_to 'Edit', edit_name_path(@name) %> |
+<%= link_to 'Back', names_path %>
